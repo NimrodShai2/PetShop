@@ -33,14 +33,14 @@
 {
     @if ((string)TempData["Action"]! == "Error")
     {
-        <div class="alert alert-danger alert-dismissible fade show">
+        <div class="alert alert-danger alert-dismissible fade show slide-in-left">
             <strong>Error!</strong> A problem has been occurred while submitting your data.
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     }
     else
     {
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success alert-dismissible fade show slide-in-left">
             <strong>Success!</strong> The Item has been @TempData["Action"]!
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
@@ -61,7 +61,7 @@
             var tm = "#myModal" + animal.Id;
             var mid = "myModal" + animal.Id;
                 <div class="col-12 col-md-6 col-lg-4">
-                <div class="card">
+                    <div class="card slide-in-top">
                     <img class="card-img-top img-fluid" src="@animal.Image" alt="@animal.Name image">
                         <div class="card-body">
                             <h4 class="card-title">@animal.Name</h4>
