@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PetShop.Models.Animal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    img{
+         max-width: 300px;
+         height: 300px;
+    }
+    .card{
+        background-color:azure;
+        text-align:center;
+        max-width: 400px;
+        height: 400px;
+    }
+    h1{
+        text-align:center;
+        margin-bottom: 50px;
+    }
+</style>
+
+<h1>Welcome To Our Shop!
+    <br />
+    <small class="text-muted">Take a look at our two stars...</small>
+</h1>
+<div class="row justify-content-around">
+    @foreach (var animal in Model)
+    {
+            <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <img class="card-img-top img-fluid" src="@animal.Image" alt="@animal.Name image">
+                <div class="card-body">
+                    <h4 class="card-title">@animal.Name</h4>
+                    <p class="card-text">@animal.Age Years Old!</p>
+                    <a asp-route-id="@animal.Id" asp-controller="Animal" asp-action="ViewDetails" class="btn btn-primary">View Details</a>
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

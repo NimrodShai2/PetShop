@@ -1,0 +1,92 @@
+﻿@model IEnumerable<PetShop.Models.Animal>
+
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<style>
+    .alert{
+        display:inline-block;
+        position: fixed;
+    }
+    a{
+        text-align:center;
+    }
+    .card{
+        background-color: azure;
+        margin: 3em;
+    }
+    img{
+        max-height: 210px;
+    }
+    h1{
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        text-align: left;
+    }
+</style>
+
+
+
+@if (TempData["Action"] != null)
+{
+    @if ((string)TempData["Action"]! == "Error")
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Error!</strong> A problem has been occurred while submitting your data.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <strong>Success!</strong> The Item has been @TempData["Action"]!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+}
+
+   <div class="row justify-content-around">
+        
+        <div class="col-3">
+            <h1>Admin Page</h1>
+             <a class="btn btn-lg btn-success" asp-action="AddAnimal">Add New Animal</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-around">
+        @foreach (var animal in Model)
+        {
+            var tm = "#myModal" + animal.Id;
+            var mid = "myModal" + animal.Id;
+                <div class="col-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="@animal.Image" alt="@animal.Name image">
+                        <div class="card-body">
+                            <h4 class="card-title">@animal.Name</h4>
+                                <a asp-route-id="@animal.Id" asp-controller="Admin" asp-action="UpdateAnimal" class="btn btn-primary">Edit</a>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@tm">Delete</button>
+                        </div>
+
+                </div>
+            </div>
+
+                <div class="modal fade" id="@mid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure want to delete this animal? It cannot be restored later.
+                                </div>
+                                <div class="modal-footer">
+                                    <a asp-action="DeleteAnimal" asp-route-Id="@animal.Id" id="deleteBtn" class="btn bg-danger mr-1">Delete</a>
+                                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+        }
+    </div> 

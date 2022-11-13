@@ -1,0 +1,78 @@
+﻿@model PetShop.Models.Animal
+
+@{
+    ViewData["Title"] = "View Details";
+}
+<style>
+    .btn-add:hover{
+        background-color: white;
+    }
+    .btn-add{
+        margin-top: 0.5em;
+    }
+    .data{
+        text-align:center;
+    }
+    h1{
+        margin: 0.5em;
+        text-align: center;
+    }
+    .card{
+        margin: 3rem;
+        padding: 1rem;
+        background-color:azure;
+    }
+</style>
+
+<script>
+    $(function(){
+        const btn = $("input[type=submit]");
+        btn.attr("disabled", true);
+        const txt = ("input[type=text]");
+        $(document).on('keyup',txt, function(){
+            const content = $("input[type=text]").val().trim();
+            btn.attr('disabled', content === '');
+        });
+    });
+</script>
+
+<h1>Details</h1>
+
+<div class="data">
+    <h4>@Model.Name</h4>
+    <div class="row justify-content-around">
+        <div class="col-6">
+            <div class="card">
+                <img src="@Model.Image" alt="Pet Image" class="figure-img card-img-top img-fluid">
+                <h5 class="card-text">Age: @Model.Age</h5>
+                <h5 class="card-text">Category: @ViewBag.Category</h5>
+                <p class="card-text" style="overflow:auto;">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="row d-flex justify-content-center" style="overflow:auto;">
+  <div class="col-12 col-md-9">
+    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+      <div class="card-body p-4">
+        <div class="form-outline mb-4">
+            @using (Html.BeginForm("AddComment", "Animal", new {id = Model.Id} ,FormMethod.Post))
+            {
+                 @Html.TextBox("text", null, new {id = Model.Id, @class = "form-control", @name = "txtInput", @overflow = "scroll"})
+                <input type="submit" class="btn btn-add" value="Add Comment"/>
+            }
+        </div>
+
+                @foreach (var comment in Model.Comments!)
+                {
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p>@comment.Content</p>
+                        </div>
+                    </div>
+                }
+      </div>
+    </div>
+  </div>
+</div>
