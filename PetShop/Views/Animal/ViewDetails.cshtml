@@ -29,7 +29,7 @@
         const btn = $("input[type=submit]");
         btn.attr("disabled", true);
         const txt = ("input[type=text]");
-        $(document).on('keyup',txt, function(){
+        $(document).on('input',txt, function(){
             const content = $("input[type=text]").val().trim();
             btn.attr('disabled', content === '');
         });
@@ -37,6 +37,14 @@
 </script>
 
 <h1>Details</h1>
+
+@if(TempData["CommentError"] != null)
+{
+        <div class="alert alert-danger alert-dismissible fade show">
+                <strong>Error!</strong> It seems that you've tried to add an empty comment. That's illegal.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+}
 
 <div class="data">
     <h4>@Model.Name</h4>
@@ -59,7 +67,7 @@
         <div class="form-outline mb-4">
             @using (Html.BeginForm("AddComment", "Animal", new {id = Model.Id} ,FormMethod.Post))
             {
-                 @Html.TextBox("text", null, new {id = Model.Id, @class = "form-control", @name = "txtInput", @overflow = "scroll"})
+                 @Html.TextBox("text", null, new {id = Model.Id, @class = "form-control", @name = "txtInput", @overflow = "auto"})
                 <input type="submit" class="btn btn-add" value="Add Comment"/>
             }
         </div>

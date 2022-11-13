@@ -63,10 +63,13 @@ namespace PetShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddComment(int id, string text)
+        public IActionResult AddComment(int id, string? text)
         {
-            if (text == null || text == String.Empty)
-                return View("ViewDetails");
+            if (text == null || text == string.Empty)         //Validation for the comment
+            {
+                TempData["CommentError"] = "Error";
+                return RedirectToAction("ViewDetails");
+            }
             var animal = _animalRepo.GetById(id);
             if (animal == null)
             {

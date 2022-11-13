@@ -13,7 +13,6 @@ namespace PetShop.Repositories
         {
             _context = context;
         }
-
         public Animal Add(Animal item)
         {
             _context.Animals!.Add(item);
@@ -49,22 +48,40 @@ namespace PetShop.Repositories
             return item;
         }
 
+        /// <summary>
+        /// Gets the top two animals with the most comments.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Animal> GetTopTwo()
         {
-            return _context.Animals!.Include(c => c.Comments).OrderByDescending(c => c.Comments!.Count).Take(2).ToList();
+            return _context.Animals!.Include(a => a.Comments).OrderByDescending(c => c.Comments!.Count).Take(2).ToList();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>All of the animals</returns>
 
         public IEnumerable<Animal> GetAll()
         {
-            return _context.Animals!.Include(c => c.Comments).ToList();
+            return _context.Animals!.Include(a => a.Comments).ToList();
         }
 
+        /// <summary>
+        /// Gets the name of the category by its id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public string GetForeignTitle(int id)
         {
             Category c = _context.Categories!.First(c => c.Id == id);
             return c.Name!;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public IEnumerable<Comment> AddComment(Comment c)
         {
             _context.Comments!.Add(c);
@@ -81,16 +98,25 @@ namespace PetShop.Repositories
         {
             return await _context.Animals!.Include(a => a.Comments).ToListAsync();
         }
+        /// <summary>
+        /// Gets the top two animal with the most commes, asynchronous.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Animal>> GetTopTwoAsync()
         {
-            return await _context.Animals!.Include(c => c.Comments).OrderByDescending(c => c.Comments!.Count).Take(2).ToListAsync();
+            return await _context.Animals!.Include(a => a.Comments).OrderByDescending(a => a.Comments!.Count).Take(2).ToListAsync();
         }
 
         public async Task<Animal?> GetAnimalAsync(int id)
         {
-            return await _context.Animals!.Include(c => c.Comments).FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Animals!.Include(a => a.Comments).FirstOrDefaultAsync(a => a.Id == id);
         }
 
+        /// <summary>
+        /// Skips a specified number of elements in the animals list, and takes the amount specified in Constants class.
+        /// </summary>
+        /// <param name="numberToSkip">Number of elements to skip</param>
+        /// <returns></returns>
         public async Task<IEnumerable<Animal>> GetNumberFromFullAsync(int numberToSkip)
         {
             var toTake = Constants.Constants.NumberOfElementsInPage;
