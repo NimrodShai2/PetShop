@@ -1,0 +1,12 @@
+﻿<div class="row justify-content-around">
+        <div class="col-10 col-md-8 col-lg-5">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                @for (int i = 0; i < ViewBag.NumberOfPages; i++)
+                {
+                            <li class="page-item flex-fill text-center"><a class="page-link" asp-action="Index" asp-route-number="@i">@(i + 1)</a></li>
+                }
+        </ul>
+            </nav>
+    </div>
+</div>

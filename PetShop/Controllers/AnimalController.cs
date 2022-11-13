@@ -12,18 +12,41 @@ namespace PetShop.Controllers
             _animalRepo = animalRepository;
         }
 
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index([FromRoute] int id, [FromQuery] int number)
         {
             ViewBag.Categories = _animalRepo.GetCategories();
+           
             if (id == 0)
-            {
+            { 
+                var num = _animalRepo.GetAll().Count() / Constants.Constants.NumberOfElementsInPage;//Determine number of pages needed, passed as a parameter for the view to create
+                if (_animalRepo.GetAll().Count() % Constants.Constants.NumberOfElementsInPage == 0)
+                {
+                    ViewBag.NumberOfPages = num;
+                }
+                else
+                {
+                    ViewBag.NumberOfPages = num + 1;
+                }
+
                 ViewBag.SelectedCat = 0;
-                return View(await _animalRepo.GetAllAsync());
+                return View(await _animalRepo.GetNumberFromFullAsync(number));
             }
-            else
+            else //The same function, but with categorized animals.
             {
                 var animals = await _animalRepo.GetAllAsync();
                 var chosen = animals.Where(c => c.CategoryId == id);
+                var num = chosen.Count() / Constants.Constants.NumberOfElementsInPage;
+                if (chosen.Count() % Constants.Constants.NumberOfElementsInPage == 0)
+                {
+                    ViewBag.NumberOfPages = num;
+                }
+                else
+                {
+                    ViewBag.NumberOfPages = num + 1;
+                }
+                chosen = chosen.Skip(number * Constants.Constants.NumberOfElementsInPage)
+                    .Take(Constants.Constants.NumberOfElementsInPage).
+                    ToList();
                 return View(chosen);
             }
         }

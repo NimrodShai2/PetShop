@@ -11,10 +11,11 @@ namespace PetShop.Repositories
         public IEnumerable<T> GetAll();
         public IEnumerable<T> GetTopTwo();
         public string GetForeignTitle(int id);
-        public IEnumerable<Comment> AddComment( Comment c);
+        public IEnumerable<Comment> AddComment(Comment c);
         public IEnumerable<Category> GetCategories();
         public Task<IEnumerable<T>> GetAllAsync();
         public  Task<IEnumerable<T>> GetTopTwoAsync();
         public Task<Animal?> GetAnimalAsync(int id);
+        public Task<IEnumerable<T>> GetNumberFromFullAsync(int numberToSkip);
     }
 }

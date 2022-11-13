@@ -15,10 +15,20 @@ namespace PetShop.Controllers
             _repo = repo;
             env = environment;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery]int number)
         {
-            var animals = await _repo.GetAllAsync();
-            return View(animals);
+            var num = _repo.GetAll().Count() / Constants.Constants.NumberOfElementsInPage;//Determine number of pages needed, passed as a parameter for the view to create
+            if (_repo.GetAll().Count() % Constants.Constants.NumberOfElementsInPage == 0)
+            {
+                ViewBag.NumberOfPages = num;
+            }
+            else
+            {
+                ViewBag.NumberOfPages = num + 1;
+            }
+
+            ViewBag.SelectedCat = 0;
+            return View(await _repo.GetNumberFromFullAsync(number));
         }
 
         [HttpPost]

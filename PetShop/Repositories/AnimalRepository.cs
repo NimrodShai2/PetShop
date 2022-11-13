@@ -2,6 +2,7 @@
 using PetShop.Data;
 using PetShop.Models;
 using System.Security.Permissions;
+using PetShop.Constants;
 
 namespace PetShop.Repositories
 {
@@ -88,6 +89,15 @@ namespace PetShop.Repositories
         public async Task<Animal?> GetAnimalAsync(int id)
         {
             return await _context.Animals!.Include(c => c.Comments).FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<IEnumerable<Animal>> GetNumberFromFullAsync(int numberToSkip)
+        {
+            var toTake = Constants.Constants.NumberOfElementsInPage;
+            return await _context.Animals!.
+                Skip(numberToSkip * toTake).
+                Take(toTake).
+                ToListAsync();
         }
     }
 }

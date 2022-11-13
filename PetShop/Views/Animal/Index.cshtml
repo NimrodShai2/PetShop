@@ -48,9 +48,9 @@
     </div>
 </div>
 <div>
-<div class="row justify-content-around">
-    @foreach (var animal in Model)
-    {
+    <div class="row justify-content-around">
+        @foreach (var animal in Model)
+        {
         
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card">
@@ -63,7 +63,7 @@
 
                 </div>
             </div>
-       
-    }
-</div> 
+        }
+    </div> 
 </div>
+<partial name="_Pagination"></partial>
