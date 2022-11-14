@@ -63,7 +63,7 @@ namespace PetShop.Repositories
 
         public IEnumerable<Animal> GetAll()
         {
-            return _context.Animals!.Include(a => a.Comments).ToList();
+            return _context.Animals!.ToList();
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace PetShop.Repositories
 
         public async Task<IEnumerable<Animal>> GetAllAsync()
         {
-            return await _context.Animals!.Include(a => a.Comments).ToListAsync();
+            return await _context.Animals!.ToListAsync();
         }
         /// <summary>
         /// Gets the top two animal with the most commes, asynchronous.
