@@ -39,18 +39,20 @@ namespace PetShop.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    Guid g = Guid.NewGuid();//Add unique identifier for each image, to prevent overriding
                     if (image == null || image.Length == 0)
                     {
                         TempData["Action"] = "Error";
                         return RedirectToAction("Index");
                     }
-                    var path = Path.Combine(env.WebRootPath, @"Images\", image.FileName);
+                    var newImageName = Path.GetFileName(g + "_" + image.FileName);
+                    var path = Path.Combine(env.WebRootPath, @"Images\", newImageName);
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await image.CopyToAsync(stream);
                         stream.Close();
                     }
-                    model.Animal!.Image = @"\Images\" + image.FileName;
+                    model.Animal!.Image = @"\Images\" + newImageName;
 
                     Animal a = new()
                     {
@@ -58,7 +60,7 @@ namespace PetShop.Controllers
                         Age = model.Animal!.Age,
                         Description = model.Animal!.Description,
                         CategoryId = model.Animal!.CategoryId,
-                        Image = @"\Images\" + image.FileName
+                        Image = @"\Images\" + newImageName
                     };
                     _repo.Add(a);
                     TempData["Action"] = "Added";
