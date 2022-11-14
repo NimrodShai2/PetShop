@@ -5,10 +5,6 @@
 }
 
 <style>
-    .alert{
-        display:inline-block;
-        margin: 3rem;
-    }
     a{
         text-align:center;
     }
@@ -27,32 +23,33 @@
 </style>
 
 
-
-@if (TempData["Action"] != null)
-{
-    @if ((string)TempData["Action"]! == "Error")
-    {
-        <div class="alert alert-danger alert-dismissible fade show slide-in-left">
-            <strong>Error!</strong> A problem has been occurred while submitting your data.
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-success alert-dismissible fade show slide-in-left">
-            <strong>Success!</strong> The Item has been @TempData["Action"]!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-}
-
-   <div class="row justify-content-around">
-        
+<div class="row justify-content-around">
         <div class="col-3">
             <h1>Admin Page</h1>
              <a class="btn btn-lg btn-success slide-in-top" asp-action="AddAnimal">Add New Animal</a>
         </div>
-    </div>
+
+    @if (TempData["Action"] != null)
+    {
+        <div class="col-3">
+        @if ((string)TempData["Action"]! == "Error")
+        {
+            <div class="alert alert-danger alert-dismissible fade show slide-in-left">
+                <strong>Error!</strong> A problem has been occurred while submitting your data.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success alert-dismissible d-inline-block fade show slide-in-left">
+                <strong>Success!</strong> The Item has been @TempData["Action"]!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        </div>
+    }
+        
+</div>
 
     <div class="row justify-content-around">
         @foreach (var animal in Model)
