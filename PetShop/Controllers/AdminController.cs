@@ -27,7 +27,7 @@ namespace PetShop.Controllers
                 ViewBag.NumberOfPages = num + 1;
             }
 
-            ViewBag.SelectedCat = 0;
+            ViewBag.SelectedCat = 0;//Selected category
             return View(await _repo.GetNumberFromFullAsync(number));
         }
 
