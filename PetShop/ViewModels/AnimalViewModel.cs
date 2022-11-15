@@ -9,7 +9,7 @@ namespace PetShop.ViewModels
         public Animal? Animal { get; set; }
 
         [Required(ErrorMessage = "Please select an image.")]
-        [AllowedExtensions(new string[] {".png", ".jpeg", ".jpg" }, ErrorMessage = "Invalid file type.")]
+        [OnlyImage(ErrorMessage = "Only Images are allowed.")]
         public IFormFile? Image { get; set; }
     }
 }

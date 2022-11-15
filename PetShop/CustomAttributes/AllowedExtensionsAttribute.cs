@@ -4,35 +4,39 @@ using System.Text;
 
 namespace PetShop.CustomAttributes
 {
-    public class AllowedExtensionsAttribute : ValidationAttribute
+    public class OnlyImageAttribute : ValidationAttribute, IClientModelValidator
     {
-        private readonly string[] _extensions;
-        public AllowedExtensionsAttribute(string[] extensions)
-        {
-            _extensions = extensions;
-        }
 
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            IFormFile? file = value as IFormFile;
-            if (file != null)
+            if (value is IFormFile file != default)
             {
-                var extension = Path.GetExtension(file.FileName);
-                if (!_extensions.Contains(extension.ToLower()))
-                {
-                    return new ValidationResult(GetErrorMessage());
-                }
+                if (file.ContentType.Contains("image"))
+                    return ValidationResult.Success;
+                else
+                    return new ValidationResult("This is not an image file");
             }
-
-            return ValidationResult.Success;
+            return new ValidationResult("Please enter an image file");
+        }
+        public void AddValidation(ClientModelValidationContext context)
+        {
+            MergeAttribute(context.Attributes, "data-val", "true");
+            var errorMessage = FormatErrorMessage(context.ModelMetadata.GetDisplayName());
+            MergeAttribute(context.Attributes, "data-val-onlyimage", errorMessage);
         }
 
-        private string GetErrorMessage()
+        private bool MergeAttribute(
+            IDictionary<string, string> attributes,
+            string key,
+            string value)
         {
-            StringBuilder sb = new();
-            sb.AppendJoin(',', _extensions);
-            return $"Only files in the following formats are allowed: {sb}";
+            if (attributes.ContainsKey(key))
+            {
+                return false;
+            }
+            attributes.Add(key, value);
+            return true;
         }
     }
 }
