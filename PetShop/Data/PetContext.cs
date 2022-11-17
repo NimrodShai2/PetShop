@@ -53,7 +53,14 @@ namespace PetShop.Data
                 new() { Id = 4, Age = 2, CategoryId = 5, Description = "An evil killer, but look at those eyes!", Image = @"\Images\spider.jpeg", Name = "Peter" },
                 new() { Id = 5, Age = 13, Name = "Daniel", CategoryId = 1, Description = "Slowest animal on earth, and the perfect pet for lazy people.", Image = @"\Images\sloth.jpg" },
                 new() { Id = 6, Age = 5, CategoryId = 1, Name = "Tom", Description = "He will never listen to you, destroy your property, and is probably evil. A perfect cat for cat lovers!", Image = @"\Images\cat.jpeg" },
-                new() { Id = 7, Age = 7, Name = "Ronny", CategoryId = 3, Description = "Godzilla's favorite cousin.", Image = @"\Images\comodo.jpg" });
+                new() { Id = 7, Age = 7, Name = "Ronny", CategoryId = 3, Description = "Godzilla's favorite cousin.", Image = @"\Images\comodo.jpg" },
+                new() { Id = 8, Age = 1, Image = @"\Images\eagle.jpg", CategoryId = 2, Name = "Sam", Description = "The American symbol, and quite an impressive pet." },
+                new() { Id = 9, Age = 6, Image = @"\Images\capybara.jpg", CategoryId = 1, Name = "Capy", Description = "A big hamster? A fluffy lazy dog? Why not both?!" },
+                new() { Id = 10, Age = 13, Image = @"\Images\mantis.jpg", CategoryId = 5, Name = "Shay", Description = "NopeNopeNopeNopeNopeNope" },
+                new() { Id = 11, Age = 14, Image = @"\Images\cobra.jpg", CategoryId = 3, Name = "Pharoh", Description = "He is mean an lethal, but also extremley cool." },
+                new() { Id = 12, Age = 22, Image = @"\Images\wolf.jpg", CategoryId = 1, Name = "Lupin", Description = "Don't bother him, he's kind of a loner." },
+                new() { Id = 13, Age = 132, Image = @"\Images\turtle.jpg", CategoryId = 3, Name = "Donatello", Description = "The largest turtle, and the nicest one." },
+                new() { Id = 14, Age = 3, Image = @"\Images\salam.jpg", CategoryId = 4, Name = "Mandy", Description = "Bright, young and beatiful. Also a good friend!" });
 
             modelBuilder.Entity<Comment>().HasData(c);
         }
