@@ -6,7 +6,7 @@ using PetShop.Constants;
 
 namespace PetShop.Repositories
 {
-    public class AnimalRepository : IRepository<Animal>
+    public class AnimalRepository : IRepository
     {
         private readonly PetContext _context;
         public AnimalRepository(PetContext context)

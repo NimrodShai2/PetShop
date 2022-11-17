@@ -2,20 +2,19 @@
 using PetShop.Models;
 using PetShop.Repositories;
 using PetShop.ViewModels;
-using System.IO;
 
 namespace PetShop.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IWebHostEnvironment env;
-        private readonly IRepository<Animal> _repo;
-        public AdminController(IRepository<Animal> repo, IWebHostEnvironment environment)
+        private readonly IRepository _repo;
+        public AdminController(IRepository repo, IWebHostEnvironment environment)
         {
             _repo = repo;
             env = environment;
         }
-        public async Task<IActionResult> Index([FromQuery]int number)
+        public async Task<IActionResult> Index([FromQuery] int number)
         {
             var num = _repo.GetAll().Count() / Constants.Constants.NumberOfElementsInPage;//Determine number of pages needed, passed as a parameter for the view to create
             if (_repo.GetAll().Count() % Constants.Constants.NumberOfElementsInPage == 0)

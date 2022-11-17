@@ -6,8 +6,8 @@ namespace PetShop.Controllers
 {
     public class AnimalController : Controller
     {
-        readonly IRepository<Animal> _animalRepo;
-        public AnimalController(IRepository<Animal> animalRepository)
+        readonly IRepository _animalRepo;
+        public AnimalController(IRepository animalRepository)
         {
             _animalRepo = animalRepository;
         }
