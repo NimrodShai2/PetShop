@@ -2,6 +2,7 @@
 using PetShop.Models;
 using PetShop.Repositories;
 using PetShop.ViewModels;
+using System.Drawing;
 
 namespace PetShop.Controllers
 {
