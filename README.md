@@ -12,3 +12,5 @@ docker pull nimrodshai/pet-shop-app:1.1
 `
 docker pull nimrodshai/pet-shop:1.1
 `
+The Connection String:
+https://github.com/NimrodShai2/PetShop/blob/master/PetShop/appsettings.json#L8-L10
