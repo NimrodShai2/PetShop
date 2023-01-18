@@ -32,6 +32,9 @@ https://github.com/NimrodShai2/PetShop/blob/eec220fbfcaebf2dd645958264fb0b5e68e9
 ### The Docker-Compose
 https://github.com/NimrodShai2/PetShop/blob/eec220fbfcaebf2dd645958264fb0b5e68e9ca11/docker-compose.yml#L1-L23
 
+### Locally
+Simply pull the repository and run locally! Be sure to have Microsoft SQL Server installed and running, and to change the connection string in the appsetings.json file accordingly.
+
 
 ## Get started
 Ready to start browsing for your new pet? Head to `http://localhost:3000` and start shopping!
