@@ -1,23 +1,23 @@
- version: '3.3' 
-  
- services: 
-   app: 
-     container_name: app 
-     image: nimrodshai/pet-shop-app:1.1
-     restart: always 
-     depends_on: 
-       - db 
-     ports: 
-         - "3000:80" 
-     networks: 
-       - db-bridge 
-   db: 
-     container_name: db 
-     environment: 
-        MSSQL_SA_PASSWORD : Qwe12345!
-     image: nimrodshai/pet-shop:1.1 
-     restart: always 
-     networks: 
-       - db-bridge 
- networks: 
-     db-bridge: {} 
+version: '3.3'
+
+services:
+  app:
+    container_name: app
+    image: nimrodshai/pet-shop-app:1.2
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "3000:80"
+    networks:
+      - db-bridge
+  db:
+    container_name: db
+    environment:
+      MSSQL_SA_PASSWORD: Qwe12345!
+    image: nimrodshai/pet-shop:1.1
+    restart: always
+    networks:
+      - db-bridge
+networks:
+  db-bridge: {}
